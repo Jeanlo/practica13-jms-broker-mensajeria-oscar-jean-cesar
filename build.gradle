@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'edu.pucmm'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+mainClassName = "main.Main"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sparkjava:spark-core:2.6.0'
+    compile 'com.sparkjava:spark-template-freemarker:2.5.5'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.j2html:j2html:1.0.0'
+    compile 'org.json:json:20090211'
+    compile 'org.apache.activemq:activemq-all:5.15.1'
+    compile 'com.h2database:h2:1.4.191'
+    compile 'org.hibernate:hibernate-core:5.1.0.Final'
+    compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task generarMensajesJar(type: Jar, dependsOn: classes) {
+    manifest {
+        attributes 'Main-Class': "main.GenerarMensajes"
+    }
+
+    into('/'){
+        from "$projectDir/src/main/resources"
+    }
+
+    from configurations.compile.collect {it.directory ? it : zipTree(it)}
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+    from files(compileJava)
+    baseName = "${project.archivesBaseName}-full"
+}
