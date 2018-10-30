@@ -18,7 +18,7 @@ Hacer una aplicación que implemente un Bróker de Mensajería, que se base en e
 
 ## Vídeo de demostración del proyecto
 
-Todavía no realizado.
+https://youtu.be/wZz62v5-O24  ==> (click en el link para ver el vídeo)
 
 ## Tecnologías requeridas
 
